@@ -40,7 +40,7 @@ View(salaries)
 salaries[57,"salary_2018"]
 salaries$salary_2018[57]
 # How many employees got a raise?
-nrow(salaries[salaries$got_raise == TRUE,])
+nrow(salaries[salaries$got_raise,])
 
 
 # What was the dollar value of the highest raise?
