@@ -20,7 +20,8 @@ salary_adjust <- runif(100, -5000, 10000)
 # Remember to set `stringsAsFactors=FALSE`!
 
 salaries <- data.frame(employee, salary_2017, salary_adjust, stringsAsFactors = FALSE)
-View(salaries)
+
+
 # Add a column to the `salaries` data frame that represents each person's
 # salary in 2018 (e.g., with the salary adjustment added in).
 salaries$salary_2018 <- salaries$salary_2017+salaries$salary_adjust
@@ -36,33 +37,35 @@ View(salaries)
 ### cell rather than the whole row!)
 
 # What was the 2018 salary of Employee 57
-
-salaries[57,"salary_2018"]
 salaries$salary_2018[57]
+salaries[57,"salary_2018"]
+
+
 # How many employees got a raise?
 nrow(salaries[salaries$got_raise,])
 
-
+salaries[salaries$got_raise]
 # What was the dollar value of the highest raise?
-max(salaries$salary_adjust)
-salaries[ salaries$salary_adjust == max(salaries$salary_adjust),]
+print(highest_raise <- max(salaries$salary_adjust))
+salaries[salaries$salary_adjust == max(salaries$salary_adjust), "salary_adjust"]
+
 # What was the "name" of the employee who received the highest raise?
 
-
+salaries[salaries$salary_adjust == highest_raise, "employee"]
 # What was the largest decrease in salaries between the two years?
 
-
+max(-salaries$salary_adjust)
 # What was the name of the employee who recieved largest decrease in salary?
-
+salaries[-salaries$salary_adjust == max(-salaries$salary_adjust), "employee"]
 
 # What was the average salary change?
 
-
+mean(salaries$salary_adjust)
 # For people who did not get a raise, how much money did they lose on average?
-
+mean(salaries$salary_adjust[salaries$got_raise == FALSE])
 
 ## Consider: do the above averages match what you expected them to be based on 
 ## how you generated the salaries?
 
 # Write a .csv file of your salary data to your working directory
-
+write.csv(salaries, "salaries.csv")
