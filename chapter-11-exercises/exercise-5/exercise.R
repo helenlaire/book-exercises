@@ -2,21 +2,37 @@
 
 # Install the `"nycflights13"` package. Load (`library()`) the package.
 # You'll also need to load `dplyr`
-#install.packages("nycflights13")  # should be done already
+install.packages("nycflights13")  # should be done already
 library("nycflights13")
 library("dplyr")
 
+View(flights)
+
 # What was the average departure delay in each month?
+dep_delay_by_month <- flights %>% 
+  group_by(month) %>% 
+  #filter(is.na(dep_delay))
+
+  summarize(
+    delay = mean(dep_delay, na.rm = TRUE)
+    
+    #remoe all na values 
+  )
+
+  View(dep_delay_by_month)
 # Save this as a data frame `dep_delay_by_month`
 # Hint: you'll have to perform a grouping operation then summarizing your data
 
 
 # Which month had the greatest average departure delay?
-
+dep_delay_by_month %>% 
+  filter(delay == max(delay)) %>% 
+  select(month)
 
 # If your above data frame contains just two columns (e.g., "month", and "delay"
 # in that order), you can create a scatterplot by passing that data frame to the
 # `plot()` function
+plot(dep_delay_by_month)
 
 
 # To which destinations were the average arrival delays the highest?
