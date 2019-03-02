@@ -12,14 +12,30 @@ library("ggplot2")
 
 # Draw a column (bar) chart of diamonds cuts by price, with each bar filled by 
 # clarity. You should see a _stacked_ bar chart.
-
+ggplot(diamonds) + 
+  geom_col(
+    mapping = aes(x = cut, y = price, fill = clarity),
+    position = "fill"
+    
+  )
 
 # Draw the same chart again, but with each element positioned to "fill" the y axis
-
+ggplot(diamonds) + 
+  geom_col(
+    mapping = aes(x = cut, y = price, fill = clarity),
+    position = "fill"
+    
+  )+ 
+  coord_flip()
 
 # Draw the same chart again, but with each element positioned to "dodge" each other
 
-
+ggplot(diamonds) + 
+  geom_col(
+    mapping = aes(x = cut, y = price, fill = clarity),
+    position = "dodge"
+    
+  )
 # Draw a plot with point geometry with the x-position mapped to `cut` and the 
 # y-position mapped to `clarity`
 # This creates a "grid" grouping the points
